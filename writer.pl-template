@@ -10,12 +10,12 @@ use warnings;
 use strict;
 
 use constant {
-    INSTANCE  => 11,                 # Chernarus instance
+    INSTANCE  => 11,           # Chernarus instance
     DB_NAME   => '@@DB_NAME@@',      # Set database name
     DB_LOGIN  => '@@DB_LOGIN@@',     # Set database login
     DB_PASSWD => '@@DB_PASSWD@@',      # Set database password
-    DB_HOST   => 'localhost',        # Set database host
-    DB_PORT   => 3306,               # Set database port (default 3306)
+    DB_HOST   => 'localhost',  # Set database host
+    DB_PORT   => 3306,         # Set database port (default 3306)
 
     CACHE_DIR => $ENV{'PWD'}.'/cache/',
     # Start inventory of player
@@ -689,6 +689,7 @@ sub h_player_update {
         }
     }
     if ($model) {
+        $model = '"'.$model.'"' if (length($model) > 3 && $model !~ m/"/);
         unless ( parse_json ($model) ) {
             print STDERR "Error h_player_update(): model invalid json!\n";
             $model = undef;
@@ -1141,4 +1142,3 @@ sub h_load_trader_details {
     
     undef %tids;
 }
-
